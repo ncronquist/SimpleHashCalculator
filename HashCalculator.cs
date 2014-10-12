@@ -13,6 +13,7 @@ namespace HashCalculator
     public partial class HashCalculator : Form
     {
         const string DefaultHashCheck = "Enter hash check value here";
+        DialogResult result;
 
         public HashCalculator()
         {
@@ -27,27 +28,27 @@ namespace HashCalculator
             this.tbHashCheck.Enter += new System.EventHandler(this.tbHashCheck_Enter);
         }
         
-        // TODO  Look into changing the Select File to work the same way as the Select Folder 
         private void btnSelectFile_Click(object sender, EventArgs e)
         {
             openFileDialog1.Title = "Select a File";
             openFileDialog1.InitialDirectory = "C:";
-            openFileDialog1.ShowDialog();
-        }
+            result = openFileDialog1.ShowDialog();
 
-        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
-        {
-            System.IO.Stream stream;
-            stream = openFileDialog1.OpenFile();
-            tbFileName.Text = openFileDialog1.FileName;
-            stream.Close();
+            if (result == DialogResult.OK)
+            {
+                tbFileName.Text = openFileDialog1.FileName;
+            }
+            else if (result == DialogResult.Cancel)
+            {
+                return;
+            }
         }
 
         private void btnSelectFolder_Click(object sender, EventArgs e)
         {
             folderBrowserDialog1.Description = "Choose a Folder";
             folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
-            DialogResult result =  folderBrowserDialog1.ShowDialog();
+            result =  folderBrowserDialog1.ShowDialog();
 
             if (result == DialogResult.OK)
             {
