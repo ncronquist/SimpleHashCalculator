@@ -60,6 +60,38 @@ namespace HashCalculator
             }
         }
 
+        private void tbFileName_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (files != null && files.Length != 0)
+            {
+                tbFileName.Text = files[0];
+            }
+        }
+
+        private void tbFileName_DragOver(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                if (files != null && files.Length == 1 && !System.IO.Directory.Exists(files[0]))
+                {
+                    //bool isFolder = System.IO.Directory.Exists(files[0]);
+                    //bool isFile = System.IO.File.Exists(files[0]);
+
+                    e.Effect = DragDropEffects.Copy;
+                }
+                else
+                {
+                    e.Effect = DragDropEffects.None;
+                }
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
         // TODO Implement md5 folder hash calculating
         private void btnCalculateMd5_Click(object sender, EventArgs e)
         {
