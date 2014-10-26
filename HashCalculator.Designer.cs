@@ -59,10 +59,13 @@
             // 
             // tbFileName
             // 
+            this.tbFileName.AllowDrop = true;
             this.tbFileName.Location = new System.Drawing.Point(12, 38);
             this.tbFileName.Name = "tbFileName";
             this.tbFileName.Size = new System.Drawing.Size(260, 20);
             this.tbFileName.TabIndex = 0;
+            this.tbFileName.DragDrop += new System.Windows.Forms.DragEventHandler(this.tbFileName_DragDrop);
+            this.tbFileName.DragOver += new System.Windows.Forms.DragEventHandler(this.tbFileName_DragOver);
             // 
             // btnSelectFile
             // 
