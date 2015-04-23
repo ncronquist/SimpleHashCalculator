@@ -22,10 +22,10 @@ namespace HashCalculator
 
         private void HashCalculator_Load(object sender, EventArgs e)
         {
-            tbHashCheck.ForeColor = Color.LightGray;
-            tbHashCheck.Text = DefaultHashCheck;
-            this.tbHashCheck.Leave += new System.EventHandler(this.tbHashCheck_Leave);
-            this.tbHashCheck.Enter += new System.EventHandler(this.tbHashCheck_Enter);
+            tbMD5HashCheck.ForeColor = Color.LightGray;
+            tbMD5HashCheck.Text = DefaultHashCheck;
+            this.tbMD5HashCheck.Leave += new System.EventHandler(this.tbHashCheck_Leave);
+            this.tbMD5HashCheck.Enter += new System.EventHandler(this.tbHashCheck_Enter);
         }
         
         private void btnSelectFile_Click(object sender, EventArgs e)
@@ -98,7 +98,7 @@ namespace HashCalculator
             Hash md5Hash = new Hash();
             String md5HashValue;
             md5HashValue = md5Hash.getMd5Hash(tbFileName.Text);
-            tbHashValue.Text = md5HashValue;
+            tbMD5HashValue.Text = md5HashValue;
             CalculateStatus();
         }
 
@@ -108,17 +108,17 @@ namespace HashCalculator
             Hash sha1Hash = new Hash();
             String sha1HashValue;
             sha1HashValue = sha1Hash.getSha1Hash(tbFileName.Text);
-            tbHashValue.Text = sha1HashValue;
+            tbMD5HashValue.Text = sha1HashValue;
             CalculateStatus();
         }
 
         private void tbHashCheck_Leave(object sender, EventArgs e)
         {
-            if (tbHashCheck.Text.Length == 0)
+            if (tbMD5HashCheck.Text.Length == 0)
             {
-                tbHashCheck.Text = DefaultHashCheck;
-                tbHashCheck.ForeColor = Color.LightGray;
-                lblStatus.Text = String.Empty;
+                tbMD5HashCheck.Text = DefaultHashCheck;
+                tbMD5HashCheck.ForeColor = Color.LightGray;
+                lblMD5Status.Text = String.Empty;
             }
             else
             {
@@ -128,31 +128,31 @@ namespace HashCalculator
 
         private void tbHashCheck_Enter(object sender, EventArgs e)
         {
-            if (tbHashCheck.Text == DefaultHashCheck)
+            if (tbMD5HashCheck.Text == DefaultHashCheck)
             {
-                tbHashCheck.Text = "";
-                tbHashCheck.ForeColor = Color.Black;
+                tbMD5HashCheck.Text = "";
+                tbMD5HashCheck.ForeColor = Color.Black;
             }
         }
 
         private void CalculateStatus()
         {
-            if (tbHashValue.Text.Length > 0 && tbHashCheck.Text != DefaultHashCheck && tbHashCheck.Text.Length > 0)
+            if (tbMD5HashValue.Text.Length > 0 && tbMD5HashCheck.Text != DefaultHashCheck && tbMD5HashCheck.Text.Length > 0)
             {
-                if (tbHashValue.Text == tbHashCheck.Text)
+                if (tbMD5HashValue.Text == tbMD5HashCheck.Text)
                 {
-                    lblStatus.Text = "Match";
-                    lblStatus.ForeColor = Color.Green;
+                    lblMD5Status.Text = "Match";
+                    lblMD5Status.ForeColor = Color.Green;
                 }
                 else
                 {
-                    lblStatus.Text = "No Match";
-                    lblStatus.ForeColor = Color.Red;                       
+                    lblMD5Status.Text = "No Match";
+                    lblMD5Status.ForeColor = Color.Red;                       
                 }
             }
             else
             {
-                lblStatus.Text = String.Empty;
+                lblMD5Status.Text = String.Empty;
             } 
         }
 
